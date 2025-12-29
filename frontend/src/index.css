@@ -87,6 +87,11 @@
   animation: slide-down 0.2s ease-out;
 }
 
+/* SVG bubble pop animation */
+.animate-bubble-pop {
+  pointer-events: none;
+}
+
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.9);
