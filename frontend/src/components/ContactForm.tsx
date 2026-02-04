@@ -1,8 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { apiService } from '../services/api';
+
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+const ACCEPTED_FILE_TYPES = ['.stl', '.3mf', '.zip'];
 
 const orderSchema = z.object({
   customerName: z.string().min(2, 'Naam moet minimaal 2 karakters bevatten'),
@@ -23,6 +26,9 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -36,6 +42,41 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
     },
   });
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setFileError(null);
+
+    if (!file) {
+      setSelectedFile(null);
+      return;
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      setFileError('Bestand is te groot. Maximaal 50MB toegestaan.');
+      setSelectedFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+
+    // Validate file type
+    const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
+    if (!ACCEPTED_FILE_TYPES.includes(fileExtension)) {
+      setFileError('Ongeldig bestandstype. Alleen STL, 3MF en ZIP bestanden zijn toegestaan.');
+      setSelectedFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+
+    setSelectedFile(file);
+  };
+
+  const removeFile = () => {
+    setSelectedFile(null);
+    setFileError(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
   const onSubmit = async (data: OrderFormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
@@ -47,10 +88,13 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
         customerPhone: data.customerPhone,
         customerMessage: data.customerMessage,
         product: data.productDocumentId,
+        file: selectedFile || undefined,
       });
 
       setSubmitSuccess(true);
       reset();
+      setSelectedFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
 
       // Scroll to success message
       setTimeout(() => {
@@ -68,7 +112,7 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
         <div className="text-green-600 text-5xl mb-4">✓</div>
-        <h3 className="text-2xl font-bold text-green-900 mb-2">Bedankt voor uw bestelling!</h3>
+        <h3 className="text-2xl font-bold text-green-900 mb-2">Bedankt voor uw bericht!</h3>
         <p className="text-green-700 mb-6">
           We hebben uw aanvraag ontvangen en nemen zo spoedig mogelijk contact met u op.
         </p>
@@ -76,7 +120,7 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
           onClick={() => setSubmitSuccess(false)}
           className="text-green-600 hover:text-green-800 font-semibold"
         >
-          Nieuwe bestelling plaatsen
+          Nieuw bericht versturen
         </button>
       </div>
     );
@@ -164,6 +208,65 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
         />
       </div>
 
+      {/* File Upload Field */}
+      <div>
+        <label htmlFor="fileUpload" className="block text-sm font-medium text-gray-700 mb-2">
+          3D Bestand uploaden <span className="text-gray-400">(optioneel)</span>
+        </label>
+        <p className="text-sm text-gray-500 mb-3">
+          Heeft u een eigen ontwerp? Upload uw STL, 3MF of ZIP bestand (max. 50MB).
+        </p>
+
+        {!selectedFile ? (
+          <div className="relative">
+            <input
+              type="file"
+              id="fileUpload"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept=".stl,.3mf,.zip"
+              className="hidden"
+            />
+            <label
+              htmlFor="fileUpload"
+              className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-colors"
+            >
+              <svg className="w-10 h-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <span className="text-sm text-gray-600">Klik om bestand te selecteren</span>
+              <span className="text-xs text-gray-400 mt-1">STL, 3MF of ZIP</span>
+            </label>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center">
+              <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <div>
+                <p className="text-sm font-medium text-blue-900">{selectedFile.name}</p>
+                <p className="text-xs text-blue-600">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={removeFile}
+              className="text-blue-600 hover:text-blue-800 p-1"
+              title="Bestand verwijderen"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {fileError && (
+          <p className="mt-2 text-sm text-red-600">{fileError}</p>
+        )}
+      </div>
+
       {/* Submit Button */}
       <div>
         <button
@@ -184,7 +287,7 @@ export const ContactForm = ({ productDocumentId, productTitle }: ContactFormProp
               Verzenden...
             </span>
           ) : (
-            'Bestelling Plaatsen'
+            'Versturen'
           )}
         </button>
       </div>

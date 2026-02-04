@@ -39,6 +39,12 @@
         "completed",
         "cancelled"
       ]
+    },
+    "uploadedFile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["files"]
     }
   }
 }

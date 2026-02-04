@@ -25,13 +25,48 @@ export const apiService = {
     customerPhone?: string;
     customerMessage?: string;
     product?: string;
+    file?: File;
   }) {
+    // If there's a file, we need to use FormData with multipart upload
+    if (orderData.file) {
+      const formData = new FormData();
+
+      // Add order data as JSON string
+      formData.append('data', JSON.stringify({
+        customerName: orderData.customerName,
+        customerEmail: orderData.customerEmail,
+        customerPhone: orderData.customerPhone,
+        customerMessage: orderData.customerMessage,
+        product: orderData.product,
+      }));
+
+      // Add the file
+      formData.append('files.uploadedFile', orderData.file, orderData.file.name);
+
+      const response = await fetch(`${API_URL}/api/orders`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Failed to submit order');
+      return response.json();
+    }
+
+    // No file, use simple JSON request
     const response = await fetch(`${API_URL}/api/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data: orderData }),
+      body: JSON.stringify({
+        data: {
+          customerName: orderData.customerName,
+          customerEmail: orderData.customerEmail,
+          customerPhone: orderData.customerPhone,
+          customerMessage: orderData.customerMessage,
+          product: orderData.product,
+        },
+      }),
     });
     if (!response.ok) throw new Error('Failed to submit order');
     return response.json();

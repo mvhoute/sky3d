@@ -40,14 +40,14 @@ export const HomePage = () => {
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="inline-block mb-4 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20">
-            <span className="text-sm font-medium">✨ Professionele 3D Printing</span>
+            <span className="text-sm font-medium">🖨️ 3D Printing als Hobby</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
             Welkom bij <span className="bg-gradient-to-r from-white to-accent-200 bg-clip-text text-transparent">Sky3D</span>
           </h1>
           <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-primary-100 font-light">
-            Hoogwaardige 3D prints op maat. Van prototype tot eindproduct,
-            wij brengen uw ideeën tot leven met precisie en creativiteit.
+            Een hobbyproject waar ik 3D prints maak voor mezelf en anderen.
+            Heb je een leuk idee? Laat het me weten!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -73,13 +73,13 @@ export const HomePage = () => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
-                Meest Populair
+                Uitgelicht
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                Uitgelichte Producten
+              <h2 className="text-4xl md:text-5xl font-bold pb-2 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                Recente Prints
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Onze meest populaire 3D prints, met zorg en precisie gemaakt
+                Een selectie van prints die ik recent heb gemaakt
               </p>
             </div>
 
@@ -115,33 +115,33 @@ export const HomePage = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Waarom Sky3D?
+            <h2 className="text-4xl md:text-5xl font-bold pb-2 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              Wat kan ik voor je maken?
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="group text-center p-8 rounded-2xl bg-gradient-to-br from-primary-50 to-white border border-primary-100 hover:shadow-xl transition-all hover:-translate-y-1">
+            <Link to="/contact" className="group text-center p-8 rounded-2xl bg-gradient-to-br from-primary-50 to-white border border-primary-100 hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
               <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">🎨</div>
               <h3 className="text-2xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>Op Maat</h3>
               <p className="text-gray-600 leading-relaxed">
-                Elk product wordt met zorg en precisie voor u gemaakt, exact volgens uw wensen
+                Heb je een specifiek idee of ontwerp? Ik kijk graag wat er mogelijk is
               </p>
-            </div>
-            <div className="group text-center p-8 rounded-2xl bg-gradient-to-br from-accent-50 to-white border border-accent-100 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">⚡</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>Snel Geleverd</h3>
+            </Link>
+            <Link to="/contact" className="group text-center p-8 rounded-2xl bg-gradient-to-br from-accent-50 to-white border border-accent-100 hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">📁</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>Eigen Bestanden</h3>
               <p className="text-gray-600 leading-relaxed">
-                Snelle productietijden zonder in te leveren op kwaliteit of precisie
+                Upload je eigen STL of 3MF bestand en ik print het voor je
               </p>
-            </div>
-            <div className="group text-center p-8 rounded-2xl bg-gradient-to-br from-primary-50 to-white border border-primary-100 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">✨</div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>Hoogwaardige Kwaliteit</h3>
+            </Link>
+            <Link to="/contact" className="group text-center p-8 rounded-2xl bg-gradient-to-br from-primary-50 to-white border border-primary-100 hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">💬</div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>Persoonlijk Contact</h3>
               <p className="text-gray-600 leading-relaxed">
-                Professionele 3D prints met een perfecte afwerking en materialen
+                Geen callcenter, gewoon direct contact voor vragen of overleg
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -151,13 +151,13 @@ export const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
-              Ons Proces
+              Hoe Werkt Het
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Hoe het werkt
+            <h2 className="text-4xl md:text-5xl font-bold pb-2 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              Eenvoudig proces
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Van idee tot afgewerkt product in 4 eenvoudige stappen
+              In een paar stappen van idee naar print
             </p>
           </div>
 
@@ -167,9 +167,9 @@ export const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-4">
                   1
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Kies Product</h3>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Kies of Upload</h3>
                 <p className="text-gray-600 text-sm">
-                  Selecteer een product uit ons assortiment of neem contact op voor maatwerk
+                  Kies een product uit de collectie of upload je eigen 3D bestand
                 </p>
               </div>
               {/* Arrow for desktop */}
@@ -185,9 +185,9 @@ export const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-4">
                   2
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Bestel</h3>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Neem Contact Op</h3>
                 <p className="text-gray-600 text-sm">
-                  Plaats uw bestelling via ons contactformulier met uw specificaties
+                  Stuur een berichtje via het contactformulier met je wensen
                 </p>
               </div>
               <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
@@ -202,9 +202,9 @@ export const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-4">
                   3
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Productie</h3>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Printen</h3>
                 <p className="text-gray-600 text-sm">
-                  Wij printen uw product met precisie en de hoogste kwaliteitsstandaarden
+                  Ik print je ontwerp en houd je op de hoogte van de voortgang
                 </p>
               </div>
               <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
@@ -219,9 +219,9 @@ export const HomePage = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-4">
                   ✓
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Ontvang</h3>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Ontvangen</h3>
                 <p className="text-gray-600 text-sm">
-                  Uw product wordt afgewerkt en bij u bezorgd of klaar voor ophalen
+                  Je print wordt bezorgd of is klaar om opgehaald te worden
                 </p>
               </div>
             </div>
@@ -229,90 +229,6 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-accent-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-dot-pattern opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
-            <div className="group">
-              <div className="text-5xl md:text-6xl font-bold mb-2 group-hover:scale-110 transition-transform" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                100+
-              </div>
-              <p className="text-primary-100 text-lg">Tevreden Klanten</p>
-            </div>
-            <div className="group">
-              <div className="text-5xl md:text-6xl font-bold mb-2 group-hover:scale-110 transition-transform" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                500+
-              </div>
-              <p className="text-primary-100 text-lg">Geprinte Producten</p>
-            </div>
-            <div className="group">
-              <div className="text-5xl md:text-6xl font-bold mb-2 group-hover:scale-110 transition-transform" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                99%
-              </div>
-              <p className="text-primary-100 text-lg">Kwaliteitsgarantie</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
-              Testimonials
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Wat onze klanten zeggen
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">
-                "Fantastische kwaliteit! De telefoonhouder die ik heb besteld is perfect en precies zoals ik wilde. Snelle levering ook!"
-              </p>
-              <p className="font-semibold text-gray-900">- Jan de Vries</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">
-                "Professionele service en prachtige afwerking. Sky3D denkt mee en levert maatwerk van topkwaliteit!"
-              </p>
-              <p className="font-semibold text-gray-900">- Lisa Bakker</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all">
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-gray-600 mb-4 italic">
-                "Voor mijn bedrijf laat ik regelmatig prototypes maken. Altijd on-time en perfecte kwaliteit. Aanrader!"
-              </p>
-              <p className="font-semibold text-gray-900">- Thomas Jansen</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
@@ -322,23 +238,23 @@ export const HomePage = () => {
 
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
-            Klaar om te <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">bestellen</span>?
+            Interesse of een <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">vraag</span>?
           </h2>
           <p className="text-gray-300 text-lg mb-10 max-w-2xl mx-auto">
-            Bekijk ons assortiment en vind het perfecte 3D geprinte product voor uw project
+            Kijk rond in de collectie of neem contact op als je iets speciaals wilt laten printen
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/producten"
               className="inline-block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-10 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all hover:scale-105"
             >
-              Naar Producten
+              Bekijk Producten
             </Link>
             <Link
               to="/contact"
               className="inline-block bg-white/10 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20 hover:scale-105"
             >
-              Contact Opnemen
+              Neem Contact Op
             </Link>
           </div>
         </div>
