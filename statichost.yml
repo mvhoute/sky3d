@@ -1,0 +1,7 @@
+# FILENAME: statichost.yml
+# Docker image to use for building (Node.js for React/Vite)
+image: node:18-alpine
+# Build command (install dependencies and build React app)
+command: cd frontend && npm ci && npm run build
+# Public directory (Vite outputs to dist by default)
+public: frontend/dist
