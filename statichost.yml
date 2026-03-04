@@ -5,3 +5,5 @@ image: node:18-alpine
 command: cd frontend && npm ci && npm run build
 # Public directory (Vite outputs to dist by default)
 public: frontend/dist
+# SPA fallback: serve index.html for all routes (required for React Router)
+spa: true
