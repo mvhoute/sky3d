@@ -20,9 +20,16 @@ sky3d/
 - **React Router** - Client-side routing
 
 ### Backend
-- **Strapi v5** - Headless CMS
-- **SQLite** - Database (development)
-- **PostgreSQL** - Database (production, recommended)
+- **Strapi v5.33.1** - Headless CMS (EU-hosted on [Strapi Cloud](https://cloud.strapi.io))
+- **PostgreSQL** - Managed database
+- **Free Tier** - No backend hosting costs
+
+## 🚀 Status: Strapi Cloud Ready
+**Current**: Self-hosted Strapi v5.33.1 (local development)
+**Target**: Migrate to [Strapi Cloud](https://cloud.strapi.io) (EU servers, free tier)
+**Benefit**: Remove DevOps overhead, automatic backups, improved reliability
+
+See [docs/STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md) for complete migration guide and step-by-step instructions.
 
 ## Getting Started
 
@@ -32,7 +39,7 @@ sky3d/
 
 ### Development Setup
 
-#### 1. Frontend Setup
+#### Frontend Setup
 
 ```bash
 cd frontend
@@ -42,31 +49,24 @@ npm run dev
 
 The frontend will be available at `http://localhost:5173`
 
-#### 2. Backend Setup
+#### Backend (Strapi Cloud)
+Backend is hosted on [Strapi Cloud](https://cloud.strapi.io). No local backend setup needed for development.
 
-```bash
-cd backend
-npm install
-npm run develop
-```
+**First time setup (admin only):**
+1. Access Strapi Cloud admin panel at your project URL
+2. Configure content types if needed (see Configuration section)
 
-The Strapi admin panel will be available at `http://localhost:1337/admin`
-
-**First time setup:**
-1. Create an admin account when prompted
-2. Configure content types (see below)
-
-### Configure Strapi Content Types
+### Configure Strapi Content Types (Strapi Cloud)
 
 #### Product Content Type
 1. Go to Content-Type Builder → Create new collection type → "Product"
 2. Add fields:
-   - `title` (Text, required)
-   - `description` (Rich text)
-   - `price` (Number, decimal, required)
-   - `featured` (Boolean, default: false)
+   - `Title` (Text, required)
+   - `Description` (Rich text - Blocks)
+   - `Price` (Number, decimal, required)
+   - `Featured` (Boolean, default: false)
    - `inStock` (Boolean, default: true)
-   - `images` (Media, multiple files)
+   - `Images` (Media, multiple files)
 3. Save and the server will restart
 
 #### Order Content Type
@@ -77,7 +77,8 @@ The Strapi admin panel will be available at `http://localhost:1337/admin`
    - `customerPhone` (Text)
    - `customerMessage` (Long text)
    - `product` (Relation: Order has one Product)
-   - `status` (Enumeration: new, processing, completed, cancelled)
+   - `customerStatus` (Enumeration: new, processing, completed, cancelled)
+   - `uploadedFile` (Media, single file)
 3. Save
 
 #### Set Permissions
@@ -124,23 +125,17 @@ npm run build
 Production files will be in `frontend/dist/`
 
 ### Backend
-```bash
-cd backend
-NODE_ENV=production npm run build
-NODE_ENV=production npm start
-```
+Backend is hosted on Strapi Cloud - no build needed. See [Strapi Cloud Migration Guide](docs/STRAPI_CLOUD_MIGRATION.md) for details.
 
-## Deployment on Raspberry Pi 5
+## Deployment
 
-See [docs/deployment.md](docs/deployment.md) for detailed deployment instructions.
+### Frontend Deployment (Statichost)
+1. Build the frontend: `cd frontend && npm run build`
+2. Deploy `frontend/dist/` folder to Statichost
+3. Configure environment variable: `VITE_API_URL=https://your-strapi-cloud-project.strapiapp.com`
 
-### Quick Overview
-1. Install Node.js 18+ on Raspberry Pi
-2. Install PostgreSQL
-3. Install PM2 for process management
-4. Deploy frontend (static files) to nginx
-5. Run Strapi backend with PM2
-6. Configure nginx proxy manager for SSL and routing
+### Backend (Strapi Cloud)
+Hosted on [Strapi Cloud](https://cloud.strapi.io). See [STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md) for setup and management instructions.
 
 ## Development Roadmap
 

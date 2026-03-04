@@ -6,47 +6,31 @@
 - Node.js 18+ installed
 - npm or yarn
 
-### 1. Start the Backend (Strapi CMS)
+### 1. Start the Frontend
 
 ```bash
-cd backend
-npm run develop
-```
-
-**First time?**
-- Strapi will open at `http://localhost:1337/admin`
-- Create your admin account
-- Follow the setup guide in `docs/phase1-complete.md` to create content types
-
-### 2. Start the Frontend
-
-```bash
-# In a new terminal window
 cd frontend
+npm install
 npm run dev
 ```
 
 Frontend will be available at: `http://localhost:5173`
 
-### 3. Configure Strapi (First Time Only)
+### 2. Backend Setup (Strapi Cloud)
 
-See detailed instructions in `docs/phase1-complete.md`, but here's the quick version:
+Backend is hosted on [Strapi Cloud](https://cloud.strapi.io). No local backend setup needed!
 
-1. **Create Product Content Type**:
-   - Go to Content-Type Builder → Create "Product"
-   - Add fields: title (Text), description (Rich text), price (Number), featured (Boolean), inStock (Boolean), images (Media - multiple)
-   
-2. **Create Order Content Type**:
-   - Create "Order" collection
-   - Add fields: customerName, customerEmail, customerPhone, customerMessage, product (relation), status (enum)
+**For admin/CMS access:**
+- Go to your Strapi Cloud project URL
+- Log in to admin panel
+- See [STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md) for migration details
 
-3. **Set Permissions**:
-   - Settings → Roles → Public
-   - Enable: Product (find, findOne), Order (create)
+### 3. Configure Frontend API URL
 
-4. **Add Sample Products**:
-   - Content Manager → Product → Create products
-   - Upload images, set prices, publish
+Update `frontend/.env`:
+```bash
+VITE_API_URL=https://your-strapi-cloud-project.strapiapp.com
+```
 
 ### 4. Test Everything
 
@@ -71,19 +55,12 @@ sky3d/
 │   │   └── App.tsx        # Main app with routing
 │   └── package.json
 │
-├── backend/           # Strapi CMS
-│   ├── src/api/          # API endpoints (auto-generated)
-│   ├── config/           # Configuration
-│   └── package.json
-│
 ├── docs/              # Documentation
-│   ├── deployment.md      # Deploy to Raspberry Pi
-│   ├── user-guide.md      # For site owner
-│   └── phase1-complete.md # Phase 1 summary
+│   ├── STRAPI_CLOUD_MIGRATION.md  # Strapi Cloud migration guide
+│   ├── user-guide.md              # For site owner
+│   └── deployment.md              # Production deployment
 │
 └── scripts/           # Deployment & backup scripts
-    ├── backup.sh
-    └── deploy.sh
 ```
 
 ---
@@ -95,13 +72,7 @@ sky3d/
 npm run dev      # Start development server
 npm run build    # Build for production
 npm run preview  # Preview production build
-```
-
-### Backend
-```bash
-npm run develop  # Development mode (auto-reload)
-npm run start    # Production mode
-npm run build    # Build admin panel
+npm run lint     # Lint code
 ```
 
 ---
@@ -125,52 +96,48 @@ npm run build    # Build admin panel
 
 ## 📚 Documentation
 
-- **Full Project Plan**: See initial project plan (shared earlier)
-- **Phase 1 Summary**: `docs/phase1-complete.md`
-- **Deployment Guide**: `docs/deployment.md` (Raspberry Pi 5)
-- **CMS User Guide**: `docs/user-guide.md` (for site owner)
-- **Main README**: `README.md`
+- **Strapi Cloud Migration**: [docs/STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md)
+- **CMS User Guide**: [docs/user-guide.md](docs/user-guide.md) (for site owner)
+- **Production Deployment**: [docs/deployment.md](docs/deployment.md)
+- **Main README**: [README.md](README.md)
 
 ---
 
 ## 🐛 Troubleshooting
 
-**Backend won't start?**
-```bash
-cd backend
-rm -rf .tmp .cache
-npm install
-npm run develop
-```
-
 **Frontend not connecting to backend?**
-- Check `frontend/.env` has correct API URL
-- Verify Strapi is running on port 1337
-- Check Strapi permissions (Public role)
+- Check `frontend/.env` has correct Strapi Cloud URL
+- Verify URL format: `https://your-project.strapiapp.com`
+- Check Strapi Cloud permissions (Public role)
 
 **No products showing?**
-- Make sure products are **Published** in Strapi (not just saved)
-- Check Public role has `find` and `findOne` permissions
+- Make sure products are **Published** in Strapi Cloud admin
+- Check Public role has `find` and `findOne` permissions on Product
 - Open browser DevTools → Network tab to see API requests
+
+**API errors?**
+- Verify Strapi Cloud project is running
+- Check admin panel is accessible
+- Review [STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md) for troubleshooting
 
 ---
 
 ## ✅ Next Steps
 
-1. ✅ **Phase 1 Complete** - Project setup and structure
-2. 🔄 **Phase 2** - Configure Strapi content types and add products
-3. ⏳ **Phase 3** - Add contact form and additional features
-4. ⏳ **Phase 4** - Testing and optimization
-5. ⏳ **Phase 5** - Deploy to Raspberry Pi 5
+1. ✅ **Setup Complete** - Frontend and Strapi Cloud configured
+2. 🔄 **Add Products** - Create and publish products in Strapi Cloud admin
+3. 🔄 **Test Forms** - Verify order submissions work
+4. ⏳ **Deploy to Production** - Deploy frontend to Statichost
+5. ⏳ **Monitoring** - Monitor Strapi Cloud dashboard
 
 ---
 
 ## 🎉 You're Ready!
 
 Your development environment is set up and ready to go. Start by:
-1. Running the backend and creating content types
-2. Adding some test products with images
-3. Viewing them on the frontend
+1. Running the frontend dev server
+2. Accessing Strapi Cloud admin to add products
+3. Viewing them on the frontend at localhost:5173
 
 Happy coding! 🚀
 

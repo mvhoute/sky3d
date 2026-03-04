@@ -14,9 +14,10 @@ Sky3D is a modern 3D printing portfolio website with a React frontend and Strapi
 - **Fonts**: Inter (body text), Poppins (headings)
 
 ### Backend
-- **CMS**: Strapi v5.33.1
-- **Database**: SQLite (development), PostgreSQL (production)
-- **API**: REST API with media library
+- **CMS**: Strapi v5.33.1 on [Strapi Cloud](https://cloud.strapi.io) (free tier)
+- **Database**: PostgreSQL (managed by Strapi Cloud)
+- **API**: REST API with CDN media delivery
+- **Status**: ⚠️ Migration from self-hosted to Strapi Cloud in progress
 
 ## Code Style & Conventions
 
@@ -196,27 +197,22 @@ products.map(p => p.Title, p.Price, p.Images)
 
 ### Development
 ```bash
-# Frontend
+# Frontend only (backend is on Strapi Cloud)
 cd frontend && npm run dev  # Port 5173
-
-# Backend
-cd backend && npm run develop  # Port 1337
 ```
 
-### Production (Raspberry Pi 5)
-- See `docs/deployment.md` for complete guide
-- PostgreSQL database
-- PM2 for process management
-- nginx proxy manager for SSL and routing
-- Backup scripts in `/scripts` directory
+### Production (Statichost + Strapi Cloud)
+- **Frontend**: Deploy `frontend/dist/` to Statichost
+- **Backend**: Hosted on [Strapi Cloud](https://cloud.strapi.io) free tier
+- See `docs/STRAPI_CLOUD_MIGRATION.md` for complete guide and migration status
+- Environment variable: `VITE_API_URL=https://your-strapi-cloud-project.strapiapp.com`
 
 ## Documentation
 - `README.md` - Project overview
 - `QUICKSTART.md` - Quick start guide
-- `docs/deployment.md` - Raspberry Pi deployment
+- `docs/STRAPI_CLOUD_MIGRATION.md` - Strapi Cloud migration details and timeline
+- `docs/deployment.md` - Legacy Raspberry Pi deployment (not currently in use)
 - `docs/user-guide.md` - CMS guide for non-technical users
-- `docs/DESIGN_UPDATE.md` - Design system details
-- `docs/PHASE3_COMPLETE.md` - Feature completion details
 
 ## Known Gotchas
 
@@ -225,6 +221,12 @@ cd backend && npm run develop  # Port 1337
 - Field names are case-sensitive
 - Rich text returns blocks array, not HTML string
 - Images field is `Images` (capital I)
+
+### Strapi Cloud Specifics
+- Media URLs are served via CDN (different from self-hosted)
+- Backups are automatic (no manual backup needed)
+- Rate limits apply (generous for free tier)
+- See [STRAPI_CLOUD_MIGRATION.md](docs/STRAPI_CLOUD_MIGRATION.md) for troubleshooting
 
 ### Mobile Menu
 - No backdrop overlay (removed for better UX)
