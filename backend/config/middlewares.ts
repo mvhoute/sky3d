@@ -8,6 +8,8 @@ export default [
       origin: [
         'http://localhost:5173',
         'https://sky-3d.statichost.page',
+        'https://sky3d.nl',
+        'https://www.sky3d.nl',
       ],
     },
   },
